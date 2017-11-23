@@ -23,3 +23,10 @@ Favorite {
     user_id,
     house_id
 }
+
+Seller {
+    id,
+    name,
+    email,
+    phone
+}
