@@ -1,0 +1,25 @@
+User {
+    id,
+    username,
+    password,
+    phone
+}
+
+House {
+    id,
+    address,
+    city,
+    state,
+    zip,
+    beds,
+    baths,
+    area,
+    price,
+    seller,
+    isAval
+}
+
+Favorite {
+    user_id,
+    house_id
+}
