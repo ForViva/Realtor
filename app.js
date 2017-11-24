@@ -5,6 +5,21 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var http = require('http');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
+
+// passport config
+var User = require('./models/user');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// mongoose
+mongoose.connect('mongodb://localhost/passport_local_mongoose_realtor');
+
 var index = require('./routes/index');
 var houses = require('./routes/houses');
 
@@ -21,6 +36,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({ secret: 'a-secret-token' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/api/houses', houses);

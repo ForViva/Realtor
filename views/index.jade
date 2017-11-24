@@ -1,4 +1,10 @@
 extends layout
 
 block content
+  if (!user)
+      a(href="/login" class="btn btn-primary") Login
+      a(href="/register" class="btn btn-default") Register
+    if (user)
+      p You are currently logged in as #{user.username}
+      a(href="/logout" class="btn btn-default") Logout
   div(ng-view)
