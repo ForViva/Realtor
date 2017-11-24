@@ -30,3 +30,64 @@ Seller {
     email,
     phone
 }
+
+Example data:
+House:
+/* 1 */
+{
+    "_id" : ObjectId("5a1736b3c0c9657e27418483"),
+    "address" : "4441 Wanda Ln",
+    "city" : "Flower Mound",
+    "state" : "TX",
+    "zip" : 75022.0,
+    "beds" : 3.0,
+    "baths" : 2.0,
+    "area" : 1759.0,
+    "price" : 255000.0,
+    "seller" : ObjectId("5a173885c0c9657e274184db"),
+    "isAval" : true
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("5a173e90c0c9657e27418661"),
+    "address" : "17 Oakbrook Dr",
+    "city" : "Lewisville",
+    "state" : "TX",
+    "zip" : 75057,
+    "beds" : 3.0,
+    "baths" : 3.5,
+    "area" : 2250,
+    "price" : 249000,
+    "seller" : ObjectId("5a173e28c0c9657e2741863f"),
+    "isAval" : true
+}
+
+Seller:
+/* 1 */
+{
+    "_id" : ObjectId("5a173885c0c9657e274184db"),
+    "name" : "Pioneer Dfw Realty, Llc",
+    "email" : "pioneer@gmail.com",
+    "phone" : "9876543210"
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("5a173e28c0c9657e2741863f"),
+    "name" : "Trang Thu Pham",
+    "email" : "trang@gmail.com",
+    "phone" : "1857463521"
+}
+
+User:
+/* 1 */
+{
+    "_id" : ObjectId("5a176aa63f0aaef2424495f1"),
+    "salt" : "7f79284932186fa03b634c37530a5f08c8877e639647d266471d8e6ba2280cc4",
+    "hash" : "e262d81bca0d6d3b26ecf2882695f96e97e3dbc7fe8b5ac1a7857fe2c30124869517c389ffc53017da31d848fe930abe2ac71e05ec8f9c5a0f0039c8242e0b88b6e39a5bf27e345cfe2938f577a99227eb0080ed01beb7c3dab96f70994eb12982ccfda161fb1878b08dcb22082ac2fcfffaea4f8ff41f5fc4d7a889018f4503185b5328328f278f89b3e3d52234b208b2c493d5a8f51234cf0e74535aa683d92333a192b8320307e7cebc74cf18cae4c2164e340e31beb88420d326b166200799ed26dd0e074dc09c432e0b33bbfd561bff5a5c6bd9c06c3af52d5894c868067e30065b7cf035070f4a5cda2472ee72da449ece3af27109107aa85055aa899d228bc60a1415a40def52a09d9b694b8791413d83739ec240023f4e8d7d46930ac0ff2d5e4dab227b9a852ed57790de1b95f7170456f92f84396cf0c09b7527dbfef45bc82a1017f3c0a4a8e4347420759e9e790281a2490b1442e82471f3f7f0137a8d20f0f42c617c2327c3db02c5fd9c39a9672014ac27569600b8ba5a7f96c2c3bf64d7888f386e5ef313857230817d6891db614549135e334f1c53d825917815b0093315e873222ee10c0e126abb35459782d2de5f85b179a214fa9f938cb86e08f1cdf7acb22a6f1a1e932745030c59302bc30ef69612fb19bc172d469be20cebd069e972a9109d0b32dde40e3239398a74816702373f92e36e06ee92a9",
+    "username" : "admin",
+    "phone" : "0000000000",
+    "__v" : 0
+}
+admin password: admin
