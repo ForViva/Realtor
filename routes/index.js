@@ -13,7 +13,7 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-	// req.checkBody('username', 'Invalid email.').isEmail();
+	req.checkBody('username', 'Invalid email.').isEmail();
 	req.checkBody('phone', 'Invalid Phone number.').isInt();
 
 	var errors = req.validationErrors();
@@ -24,19 +24,21 @@ router.post('/register', function(req, res) {
 		User.findOne({ 'username': req.body.username })
 			.exec( function(err, found_username) {
 				console.log('found_username: ' + found_username);
-					if (err) { return next(err); }					
-					if (found_username) { 
-						return res.render('register', { user : user });
-					}	else {
-						User.register(new User({ username : req.body.username, phone : req.body.phone }), req.body.password, function(err, user) {
-							if (err) {
-								return res.render('register', { user : user });
-							}
-							passport.authenticate('local')(req, res, function() {
-								res.redirect('/');
-							});
+				if (err) { 
+					return next(err); 
+				}
+				if (found_username) { 
+					return res.render('register', { user : user });
+				}	else {
+					User.register(new User({ username : req.body.username, phone : req.body.phone }), req.body.password, function(err, user) {
+						if (err) {
+							return res.render('register', { user : user });
+						}
+						passport.authenticate('local')(req, res, function() {
+							res.redirect('/');
 						});
-					}       
+					});
+				}
 			}
 		);
 	}

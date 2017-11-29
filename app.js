@@ -37,11 +37,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'a-secret-token' }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', index);
 app.use('/api/houses', houses);
