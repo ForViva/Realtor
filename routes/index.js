@@ -13,38 +13,33 @@ router.get('/register', function(req, res) {
 });
 
 router.post('/register', function(req, res) {
-  	req.checkBody('firstname', 'Invalid First Name.').isAlpha();
-  	req.checkBody('lastname', 'Invalid Last Name.').isAlpha();
-  	req.checkBody('phone', 'Invalid Phone number.').isInt();
-  	req.checkBody('email', 'Invalid email.').isEmail();
+	// req.checkBody('username', 'Invalid email.').isEmail();
+	req.checkBody('phone', 'Invalid Phone number.').isInt();
 
-  	var errors = req.validationErrors();
+	var errors = req.validationErrors();
 
-  	if (errors) {
-  		return res.render('register', { errors: errors });
-  	}
-  	else {
-  		User.findOne({ 'username': req.body.username })
-            .exec( function(err, found_username) {
-                 console.log('found_username: ' + found_username);
-                 if (err) { return next(err); }
-                 
-                 if (found_username) { 
-                     return res.render('register', { user : user });
-                 }
-                 else {
-                 	User.register(new User({ username : req.body.username, firstname: req.body.firstname, lastname:req.body.lastname, email:req.body.email, phone : req.body.phone }), req.body.password, function(err, user) {
-						if (err) {
-							return res.render('register', { user : user });
-						}
-
-						passport.authenticate('local')(req, res, function() {
-							res.redirect('/');
+	if (errors) {
+		return res.render('register', { errors: errors });
+	} else {
+		User.findOne({ 'username': req.body.username })
+			.exec( function(err, found_username) {
+				console.log('found_username: ' + found_username);
+					if (err) { return next(err); }					
+					if (found_username) { 
+						return res.render('register', { user : user });
+					}	else {
+						User.register(new User({ username : req.body.username, phone : req.body.phone }), req.body.password, function(err, user) {
+							if (err) {
+								return res.render('register', { user : user });
+							}
+							passport.authenticate('local')(req, res, function() {
+								res.redirect('/');
+							});
 						});
-					});
-                }       
-             });
-  	}
+					}       
+			}
+		);
+	}
 });
 
 router.get('/login', function(req, res) {
