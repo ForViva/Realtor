@@ -11,28 +11,29 @@ html(ng-app='Realtor')
   body
     nav.navbar.navbar-default.navbar-static-top(role="navigation")
       .container-fluid
-        .navbar-header
-          a.navbar-brand(href="/#/") Realtor
-        ul.nav.navbar-nav.navbar-left
-          li
-            form.navbar-form.navbar-left
-              .input-group
-                input.form-control(type="text", placeholder="Search", style="width: 30em")
-                .input-group-btn
-                  button.btn.btn-default(type="submit")
-                    i.glyphicon.glyphicon-search
-          li
-            a(href="#") Favorites
-        ul.nav.navbar-nav.navbar-right
-          if (!user)
+        .margin-left-right
+          .navbar-header
+            a.navbar-brand(href="/#/") Realtor
+          ul.nav.navbar-nav.navbar-left
             li
-              a(href="/login") Login
+              form.navbar-form.navbar-left
+                .input-group
+                  input.form-control(type="text", placeholder="Search", style="width: 30em")
+                  .input-group-btn
+                    button.btn.btn-default(type="submit")
+                      i.glyphicon.glyphicon-search
             li
-              a(href="/register") Register
-          if (user)
-            li
-              p.navbar-text Welcome, #{user.username}.
-            li
-              a(href="/logout") Logout
+              a(href="#") Favorites
+          ul.nav.navbar-nav.navbar-right
+            if (!user)
+              li
+                a(href="/login") Login
+              li
+                a(href="/register") Register
+            if (user)
+              li
+                .navbar-text(style="color: #347B98;") #{user.username}
+              li
+                a(href="/logout") Logout
     .margin-left-right
       block content
