@@ -6,19 +6,7 @@ var db = monk('localhost:27017/realtor');
 
 router.get('/', function(req, res) {
   var collection = db.get('Favorite');
-  var user = monk.id(req.session.user);
-  var houses = [];
-  // Favorite.find({  }, function(err, favis) {
-  //   if (err) throw err;
-  //   favis.forEach(function(favi) {
-  //     console.log(favi);
-  //     House.findOne({ _id: favi.house_id }), function(err, house) {
-  //       if (err) throw err;
-  //         houses.push(house);
-  //     }
-  //   });
-  //   res.json(houses);
-  // });
+  var user = monk.id(req.session.user);  
   collection.aggregate([
       {$match: { user_id: user }},
       {$lookup: {
