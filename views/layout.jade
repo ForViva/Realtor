@@ -27,13 +27,13 @@ html(ng-app='Realtor')
           ul.nav.navbar-nav.navbar-right
             if (!user)
               li
-                a(href="/login") Login
+                a(href="/register") REGISTER
               li
-                a(href="/register") Register
+                a(href="/login") LOGIN
             if (user)
               li
                 .navbar-text(style="color: #347B98;") #{user.username}
               li
-                a(href="/logout") Logout
+                a(href="/logout") LOGOUT
     .margin-left-right
       block content
