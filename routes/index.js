@@ -5,6 +5,7 @@ var User = require('../models/user');
 var router = express.Router();
 
 router.get('/', function(req, res) {
+	req.session.user = req.isAuthenticated() ? req.user._id : '';
 	res.render('index', { user : req.user });
 });
 

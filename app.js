@@ -23,6 +23,7 @@ mongoose.connect('mongodb://localhost/passport_local_mongoose_realtor');
 
 var index = require('./routes/index');
 var houses = require('./routes/houses');
+var favis = require('./routes/favorites');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/api/houses', houses);
+app.use('/api/favorites', favis);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

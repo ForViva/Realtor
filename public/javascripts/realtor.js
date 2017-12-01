@@ -10,6 +10,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/house-detail.html',
       controller: 'HouseDetailCtrl'
     })
+    .when('/favorites', {
+      templateUrl: 'partials/favorites.html',
+      controller: 'FavoritesCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -29,6 +33,15 @@ app.controller('HouseDetailCtrl', ['$scope', '$resource', '$location', '$routePa
     var Houses = $resource('/api/houses/:id', { id: '@_id' });
     Houses.get({ id: $routeParams.id }, function(house) {
       $scope.house = house;
+    });
+  }
+]);
+
+app.controller('FavoritesCtrl', ['$scope', '$resource', 
+  function($scope, $resource) {
+    var Favis = $resource('/api/favorites');
+    Favis.query(function(favis) {
+      $scope.favis = favis;
     });
   }
 ]);
