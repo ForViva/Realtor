@@ -28,18 +28,23 @@ app.controller('HomeCtrl', ['$scope', '$resource',
   }
 ]);
 
-app.controller('HouseDetailCtrl', ['$scope', '$resource', '$location', '$routeParams',
-  function($scope, $resource, $location, $routeParams) {	
+app.controller('HouseDetailCtrl', ['$scope', '$resource', '$route', '$routeParams',
+  function($scope, $resource, $route, $routeParams) {	
     var Houses = $resource('/api/houses/:id', { id: '@_id' });
     var Favi = $resource('/api/favorites/:id', { id: '@_id' });
     Houses.get({ id: $routeParams.id }, function(house) {
       $scope.house = house;
     });
     Favi.get({ id: $routeParams.id }, function(favi) {
-      $scope.favi = favi;
+      $scope.isFavi = (favi._id != null);
     });
     $scope.add = function() {
       $resource('/api/favorites').save($scope.house);
+      $route.reload();
+    }
+    $scope.remove = function() {
+      Favi.delete({ id: $routeParams.id });
+      $route.reload();
     }
   }
 ]);

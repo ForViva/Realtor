@@ -4,7 +4,13 @@ var router = express.Router();
 var monk = require('monk');
 var db = monk('localhost:27017/realtor');
 
+var msg = { msg: "unauthorized" };
+
 router.get('/', function(req, res) {
+  if (req.session.user == '') {
+    res.json(msg);
+    return;
+  }
   var collection = db.get('Favorite');
   var user = monk.id(req.session.user);
   collection.aggregate([
@@ -23,33 +29,57 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
+  if (req.session.user == '') {
+    res.json(msg);
+    return;
+  }
   var collection = db.get('Favorite');
   var user = monk.id(req.session.user);
-  collection.find({
-    user_id: user,
-    house_id: req.params.id
+  var house = monk.id(req.params.id);
+  collection.findOne({
+      user_id: user,
+      house_id: house
     }, function(err, favi) {
-      if (favi)
-        res.json(true);
-      else
-        res.json(false);
+      if (err) throw err;
+      res.json(favi);
     }
   );
 });
 
 router.post('/', function(req, res) {
+  if (req.session.user == '') {
+    res.json(msg);
+    return;
+  }
   var collection = db.get('Favorite');
   var user = monk.id(req.session.user);
   var house = monk.id(req.body._id);
-  if (user != '') {
-      collection.insert({
-        user_id: user,            
-        house_id: house
-      }, function(err, favi) {
-          if (err) throw err;
-          res.json(favi);
-      });
+  collection.insert({
+      user_id: user,            
+      house_id: house
+    }, function(err, favi) {
+      if (err) throw err;
+      res.json(favi);
+    }
+  );
+});
+
+router.delete('/:id', function(req, res) {
+  if (req.session.user == '') {
+    res.json(msg);
+    return;
   }
+  var collection = db.get('Favorite');
+  var user = monk.id(req.session.user);
+  var house = monk.id(req.params.id);
+  collection.remove({
+      user_id: user,
+      house_id: house
+    }, function(err, favi) {
+      if (err) throw err;
+      res.json(favi);
+    }
+  );
 });
 
 module.exports = router;

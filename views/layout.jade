@@ -23,7 +23,10 @@ html(ng-app='Realtor')
                     button.btn.btn-default(type="submit")
                       i.glyphicon.glyphicon-search
             li
-              a(href="/#/favorites") Favorites
+              if (user)
+                a(href="/#/favorites") Favorites
+              if (!user)
+                a(href="/login") Favorites
           ul.nav.navbar-nav.navbar-right
             if (!user)
               li

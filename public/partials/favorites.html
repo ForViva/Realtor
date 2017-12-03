@@ -1,7 +1,8 @@
 <ul>
-    <li ng-repeat='favi in favis'>
+    <li ng-repeat="favi in favis">
         <a href="/#/house/{{favi.house[0]._id}}">
             {{favi.house[0].address}}, {{favi.house[0].city}}, {{favi.house[0].state}} {{favi.house[0].zip}}
         </a>
     </li>
+    <p ng-if="favis.length == 0">Your list is empty.</p>
 </ul>
