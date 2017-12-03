@@ -19,7 +19,7 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-app.controller('HomeCtrl', ['$scope', '$resource', 
+app.controller('HomeCtrl', ['$scope', '$resource',
   function($scope, $resource) {
     var Houses = $resource('/api/houses');
     Houses.query(function(houses) {
@@ -31,9 +31,16 @@ app.controller('HomeCtrl', ['$scope', '$resource',
 app.controller('HouseDetailCtrl', ['$scope', '$resource', '$location', '$routeParams',
   function($scope, $resource, $location, $routeParams) {	
     var Houses = $resource('/api/houses/:id', { id: '@_id' });
+    var Favi = $resource('/api/favorites/:id', { id: '@_id' });
     Houses.get({ id: $routeParams.id }, function(house) {
       $scope.house = house;
     });
+    Favi.get({ id: $routeParams.id }, function(favi) {
+      $scope.favi = favi;
+    });
+    $scope.add = function() {
+      $resource('/api/favorites').save($scope.house);
+    }
   }
 ]);
 
