@@ -1,3 +1,37 @@
-<p>{{house.address}}, {{house.city}}, {{house.state}} {{house.zip}}</p>
-<input type="button" value="Add Favorite" class="btn btn-danger" ng-click="add()" ng-if="isFavi == false" />
-<input type="button" value="Remove Favorite" class="btn btn-default" ng-click="remove()" ng-if="isFavi == true" />
+<h1>
+    {{house.address}}, {{house.city}}
+    <input type="button" value="Add Favorite" class="btn btn-danger" ng-click="add()" ng-if="isFavi == false" />
+    <input type="button" value="Remove Favorite" class="btn btn-default" ng-click="remove()" ng-if="isFavi == true" />
+</h1>
+<div class="row">
+    <div class="col-md-6">
+        <a href="images/{{house._id}}/0.jpg" class="thumbnail">
+            <img src="images/{{house._id}}/0.jpg" alt="photo0" />
+        </a>
+    </div>
+</div>
+<h3>
+    $ {{house.price}}
+    <input type="button" value="Contect Seller" class="btn btn-primary" />
+</h3>
+<h4>{{house.beds}} beds, {{house.baths}} baths, {{house.area}} sqft</h4>
+<br>
+
+<h2>More Photos</h2>
+<div class="row">
+    <div class="col-md-3">
+        <a href="images/{{house._id}}/1.jpg" class="thumbnail">
+            <img src="images/{{house._id}}/1.jpg" alt="photo1" />
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="images/{{house._id}}/2.jpg" class="thumbnail">
+            <img src="images/{{house._id}}/2.jpg" alt="photo2" />
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="images/{{house._id}}/3.jpg" class="thumbnail">
+            <img src="images/{{house._id}}/3.jpg" alt="photo3" />
+        </a>
+    </div>
+</div>
