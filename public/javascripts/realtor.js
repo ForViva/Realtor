@@ -14,22 +14,37 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/favorites.html',
       controller: 'FavoritesCtrl'
     })
+    .when('/addhouse', {
+      templateUrl: 'partials/house-form-add.html',
+      controller: 'AddHouseCtrl'
+    })
+    .when('/edithouse/:id', {
+      templateUrl: 'partials/house-form-edit.html',
+      controller: 'EditHouseCtrl'
+    })
+    .when('/deletehouse/:id', {
+      templateUrl: 'partials/house-delete.html',
+      controller: 'DeleteHouseCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
 }]);
 
-app.controller('HomeCtrl', ['$scope', '$resource',
-  function($scope, $resource) {
+app.controller('HomeCtrl', ['$scope', '$resource', '$location',
+  function($scope, $resource, $location) {
     var Houses = $resource('/api/houses');
     Houses.query(function(houses) {
       $scope.houses = houses;
     });
+    $scope.addhouse = function() {
+      $location.path('/addhouse');
+    };
   }
 ]);
 
-app.controller('HouseDetailCtrl', ['$scope', '$resource', '$route', '$routeParams',
-  function($scope, $resource, $route, $routeParams) {	
+app.controller('HouseDetailCtrl', ['$scope', '$resource','$route', '$routeParams', '$location',
+  function($scope, $resource, $route, $routeParams, $location) {	
     var Houses = $resource('/api/houses/:id', { id: '@_id' });
     var Favi = $resource('/api/favorites/:id', { id: '@_id' });
     Houses.get({ id: $routeParams.id }, function(house) {
@@ -41,11 +56,17 @@ app.controller('HouseDetailCtrl', ['$scope', '$resource', '$route', '$routeParam
     $scope.add = function() {
       $resource('/api/favorites').save($scope.house);
       $route.reload();
-    }
+    };
     $scope.remove = function() {
       Favi.delete({ id: $routeParams.id });
       $route.reload();
-    }
+    };
+    $scope.edithouse = function(){
+      $location.path('/edithouse/'+ $routeParams.id);
+    };
+    $scope.deletehouse = function(){
+      $location.path('/deletehouse/'+ $routeParams.id);
+    };
   }
 ]);
 
@@ -57,3 +78,55 @@ app.controller('FavoritesCtrl', ['$scope', '$resource',
     });
   }
 ]);
+
+app.controller('AddHouseCtrl', ['$scope', '$resource', '$location',
+    function($scope, $resource, $location){
+        $scope.save = function(){
+            if($scope.house.address){
+                var Houses = $resource('/api/houses');
+                Houses.save($scope.house, function(){
+                    $location.path('/');
+                });
+            }
+        };
+        $scope.back = function(){
+            $location.path('/');
+        };
+    }]);
+
+app.controller('EditHouseCtrl', ['$scope', '$resource', '$location', '$routeParams',
+    function($scope, $resource, $location, $routeParams){   
+        var Houses = $resource('/api/houses/:id', { id: '@_id' }, {
+            update: { method: 'PUT' }
+        });
+        Houses.get({ id: $routeParams.id }, function(house){
+            $scope.house = house;
+        });
+        $scope.update = function(){
+            if($scope.house.address){
+                Houses.update($scope.house, function(){
+                    $location.path('/');
+                });
+            }
+        };
+        $scope.back = function(){
+            $location.path('/house/' + $routeParams.id);
+        };
+
+    }]);
+
+app.controller('DeleteHouseCtrl', ['$scope', '$resource', '$location', '$routeParams',
+    function($scope, $resource, $location, $routeParams){
+        var Houses = $resource('/api/houses/:id');
+        Houses.get({ id: $routeParams.id }, function(house){
+            $scope.house = house;
+        })
+        $scope.delete = function(){
+            Houses.delete({ id: $routeParams.id }, function(house){
+                $location.path('/');
+            });
+        };
+        $scope.back = function(){
+            $location.path('/house/' + $routeParams.id);
+        }
+    }]);

@@ -1,7 +1,10 @@
 <h1>
     {{house.address}}, {{house.city}}
-    <input type="button" value="Add Favorite" class="btn btn-danger" ng-click="add()" ng-if="isFavi == false" />
-    <input type="button" value="Remove Favorite" class="btn btn-default" ng-click="remove()" ng-if="isFavi == true" />
+    <input type="button" value="Add Favorite" class="btn btn-danger" ng-click="add()" ng-if="isFavi == false"></input>
+    <input type="button" value="Remove Favorite" class="btn btn-default" ng-click="remove()" ng-if="isFavi == true"></input>
+    <input type="button" class="btn btn-danger" value="Edit" ng-click="edithouse()"></input>
+    <input type="button" class="btn btn-danger" value="Delete" ng-click="deletehouse()"></input>
+
 </h1>
 <div class="row">
     <div class="col-md-6">
@@ -12,7 +15,7 @@
 </div>
 <h3>
     $ {{house.price}}
-    <input type="button" value="Contect Seller" class="btn btn-primary" />
+    <input type="button" value="Contact Seller" class="btn btn-primary" />
 </h3>
 <h4>{{house.beds}} beds, {{house.baths}} baths, {{house.area}} sqft</h4>
 <br>
