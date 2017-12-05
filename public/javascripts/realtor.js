@@ -30,6 +30,9 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/house-delete.html',
       controller: 'DeleteHouseCtrl'
     })
+    .when('/contact', {
+      templateUrl: 'partials/contact.html'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -70,6 +73,9 @@ app.controller('HouseDetailCtrl', ['$scope', '$resource','$route', '$routeParams
     };
     $scope.deletehouse = function(){
       $location.path('/deletehouse/'+ $routeParams.id);
+    };
+    $scope.contact = function() {
+      $location.path('/contact');
     };
   }
 ]);
