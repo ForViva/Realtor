@@ -7,7 +7,7 @@ var db = monk('localhost:27017/realtor');
 
 router.get('/', function(req, res) {
   var collection = db.get('House');
-  collection.find({ isAval: true }, function(err, houses){
+  collection.find({  }, function(err, houses){
     if (err) throw err;
     res.json(houses);
   });

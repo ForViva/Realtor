@@ -35,7 +35,10 @@ html(ng-app='Realtor')
                 a(href="/login") LOGIN
             if (user)
               li
-                .navbar-text(style="color: #347B98;") #{user.username}
+                if (user.username == "admin")
+                  a(href="/#/admin" style="color: #347B98;") admin
+                if (user.username != "admin")
+                  .navbar-text(style="color: #347B98;") #{user.username}
               li
                 a(href="/logout") LOGOUT
     .margin-left-right

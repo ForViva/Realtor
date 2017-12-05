@@ -10,6 +10,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/house-detail.html',
       controller: 'HouseDetailCtrl'
     })
+    .when('/admin', {
+      templateUrl: 'partials/home.html',
+      controller: 'HomeCtrl'
+    })
     .when('/favorites', {
       templateUrl: 'partials/favorites.html',
       controller: 'FavoritesCtrl'
