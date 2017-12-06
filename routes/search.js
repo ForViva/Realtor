@@ -17,19 +17,19 @@ router.get('/:key', function(req, res) {
 	
 });
 
-// router.get('/ ', function(req, res) {
-//   var collection = db.get('House');
-//  	// const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
-//  	res.json(req.query.keywords);
-
-  // collection.find({
-  //     statee: regex
-  //   }, function(err, sear) {
-  //     if (err) throw err;
-  //     res.json(sear);
-  //   }
-  // );
-// });
+router.get('/ ', function(req, res) {
+  var collection = db.get('House');
+ 	const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
+ 	res.json(req.query.keywords);
+  
+  collection.aggregate([
+        { $match: { $or: [ { state: keyword }, { address:keyword }, { city:keyword } ] } },
+      ], function(err, sear) {
+        if (err) throw err;
+        res.json(sear);
+      }
+    );
+});
 
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

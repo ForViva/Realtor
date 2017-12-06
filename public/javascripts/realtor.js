@@ -33,8 +33,8 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html'
     })
-    .when('/search', {
-      templateUrl: 'partials/searchresult.html',
+    .when('/search/:key', {
+      templateUrl: 'partials/result.html',
       controller: 'SearchCtrl'
     })
     .otherwise({

@@ -1,0 +1,8 @@
+<ul>
+    <li ng-repeat="sea in sear">
+        <a href="/#/house/{{sea.house[0]._id}}">
+            {{sea.house[0].address}}, {{sea.house[0].city}}, {{sea.house[0].state}} {{sea.house[0].zip}}
+        </a>
+    </li>
+    <p ng-if="sea.length == 0">Your list is empty.</p>
+</ul>
