@@ -104,6 +104,77 @@ House:
     "isAval" : true
 }
 
+{
+    "_id" : ObjectId("babbbe5b18a3d95a4103abb31b768"),
+    "address" : "7403 Fireoak Dr",
+    "city" : "Austin",
+    "state" : "TX",
+    "zip" : 78759.0,
+    "beds" : 3.0,
+    "baths" : 3.0,
+    "area" : 2170.0,
+    "price" : 434900.0,
+    "seller" : ObjectId("5a173e28c0c9657e2741863f"),
+    "isAval" : true
+}
+
+{
+    "_id" : ObjectId("b569e879ff61e2af2e8635a48f6131f"),
+    "address" : "4431 N Whipple St",
+    "city" : "Chicago",
+    "state" : "IL",
+    "zip" : 60625.0,
+    "beds" : 4.0,
+    "baths" : 3.0,
+    "area" : 2616.0,
+    "price" : 899000.0,
+    "seller" : ObjectId("5a173885c0c9657e274184db"),
+    "isAval" : true
+}
+
+{
+    "_id" : ObjectId("b50e0a91367d381955164da127ba0"),
+    "address" : "28 Saint Gregory St Unit 1",
+    "city" : " Boston",
+    "state" : "MA",
+    "zip" : 02124.0,
+    "beds" : 2.0,
+    "baths" : 2.0,
+    "area" : 1100.0,
+    "price" : 549000.0,
+    "seller" : ObjectId("5a173885c0c9657e274184db"),
+    "isAval" : true
+}
+
+{
+    "_id" : ObjectId("b50e0a91367d381955164da127ba0"),
+    "address" : "28 Saint Gregory St Unit 1",
+    "city" : " Boston",
+    "state" : "MA",
+    "zip" : 02124.0,
+    "beds" : 2.0,
+    "baths" : 2.0,
+    "area" : 1100.0,
+    "price" : 549000.0,
+    "seller" : ObjectId("5a173885c0c9657e274184db"),
+    "isAval" : true
+}
+
+{
+    "_id" : ObjectId("3014e24c85fea29f91e1af25ea5655a"),
+    "address" : "9311 Thoroughbred Ct",
+    "city" : "  Indianapolis",
+    "state" : "IN",
+    "zip" : 46278.0,
+    "beds" : 4.0,
+    "baths" : 4.0,
+    "area" : 5327.0,
+    "price" : 600000.0,
+    "seller" : ObjectId("5a173e28c0c9657e2741863f"),
+    "isAval" : true
+}
+
+
 
 
 Seller:
