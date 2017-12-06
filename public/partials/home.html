@@ -1,9 +1,22 @@
+<<<<<<< HEAD
 <div data-ng-controller="HomeCtrl">
 
 <form ng-submit="search()">
 	<input type="text" ng-model="keyword" name="keyword" />
 	<input type="submit" id="searh" value="Search" />
 </form>
+=======
+<form ng-submit="submit()" >
+  <div class="form-group">
+    <input type="text" ng-model="text"name="keywords" placeholder="Search" style="width: 30em"/>
+    <input type="submit" class = "btn btn-default" value="Search"/>
+  </div>
+</form >
+>>>>>>> fad30b9399ec3e3c8030858f75e9a65ddf51d901
+
+
+
+
 
 <div ng-if=true>
 <p><input type="button" class="btn btn-danger" value="Add a House" ng-click="addhouse()"></input></p>
@@ -21,10 +34,10 @@
   <div class="col-sm-6 col-md-4" ng-repeat='house in houses'>
     <a href="/#/house/{{house._id}}">
       <div class="thumbnail">
-        <img src="images/{{house._id}}/0.jpg" alt="photo0" />
+        <img src="images/{{house._id}}/0.jpg" alt="photo1" />
         <div class="caption">
-          <h3> {{house.address}}</h3>
-          <p class="description">{{house.city}}, {{house.state}} {{house.zip}}</p>
+          <h3> {{house.city}}</h3>
+          <p class="description">{{house.address}}, {{house.state}} {{house.zip}}</p>
         </div>
       </div>
 		</a>
