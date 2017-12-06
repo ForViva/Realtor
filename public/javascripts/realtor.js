@@ -33,6 +33,10 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html'
     })
+    .when('/search:', {
+      templateUrl: 'partials/searchresult.html',
+      controller: 'SearchCtrl'
+    })
     .otherwise({
       redirectTo: '/'
     });
@@ -85,6 +89,15 @@ app.controller('FavoritesCtrl', ['$scope', '$resource',
     var Favis = $resource('/api/favorites');
     Favis.query(function(favis) {
       $scope.favis = favis;
+    });
+  }
+]);
+
+app.controller('SearchCtrl', ['$scope', '$resource',
+  function($scope, $resource) { 
+    var Searchresult = $resource('/api/search'); 
+    Searchresult.query(function(sear) {
+      $scope.sear = sear;
     });
   }
 ]);

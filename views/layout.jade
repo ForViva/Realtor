@@ -16,9 +16,9 @@ html(ng-app='Realtor')
             a.navbar-brand(href="/#/") Realtor
           ul.nav.navbar-nav.navbar-left
             li
-              form.navbar-form.navbar-left
+              form(action='/search' method='GET').navbar-form.navbar-left
                 .input-group
-                  input.form-control(type="text", placeholder="Search", style="width: 30em")
+                  input.form-control(type="text", name="keywords", placeholder="Search", style="width: 30em")
                   .input-group-btn
                     button.btn.btn-default(type="submit")
                       i.glyphicon.glyphicon-search
