@@ -1,0 +1,14 @@
+<div ng-if=true>
+<p><input type="button" class="btn btn-primary" value="Add a House" ng-click="addhouse()"></input></p>
+</div>
+
+<ul>
+    <li ng-repeat='house in houses'>
+        <a href="/#/house/edit/{{house._id}}">
+            {{house.address}}, {{house.city}}, {{house.state}} {{house.zip}}
+        </a>
+        <a href="/#/house/delete/{{house._id}}">
+            <i class="glyphicon glyphicon-remove"></i>
+        </a>
+    </li>
+</ul>

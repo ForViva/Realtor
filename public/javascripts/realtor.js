@@ -6,27 +6,27 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'partials/home.html',
       controller: 'HomeCtrl'
     })
+    .when('/house/add', {
+      templateUrl: 'partials/house-form-add.html',
+      controller: 'AddHouseCtrl'
+    })
     .when('/house/:id', {
       templateUrl: 'partials/house-detail.html',
       controller: 'HouseDetailCtrl'
     })
     .when('/admin', {
-      templateUrl: 'partials/home.html',
+      templateUrl: 'partials/admin.html',
       controller: 'HomeCtrl'
     })
     .when('/favorites', {
       templateUrl: 'partials/favorites.html',
       controller: 'FavoritesCtrl'
     })
-    .when('/addhouse', {
-      templateUrl: 'partials/house-form-add.html',
-      controller: 'AddHouseCtrl'
-    })
-    .when('/edithouse/:id', {
+    .when('/house/edit/:id', {
       templateUrl: 'partials/house-form-edit.html',
       controller: 'EditHouseCtrl'
     })
-    .when('/deletehouse/:id', {
+    .when('/house/delete/:id', {
       templateUrl: 'partials/house-delete.html',
       controller: 'DeleteHouseCtrl'
     })
@@ -61,7 +61,7 @@ app.controller('HomeCtrl', ['$scope', '$resource', '$location',
     };
     
     $scope.addhouse = function() {
-      $location.path('/addhouse');
+      $location.path('/house/add');
     };
   }
 ]);
@@ -83,12 +83,6 @@ app.controller('HouseDetailCtrl', ['$scope', '$resource', '$route', '$routeParam
     $scope.remove = function() {
       Favi.delete({ id: $routeParams.id });
       $route.reload();
-    };
-    $scope.edithouse = function(){
-      $location.path('/edithouse/'+ $routeParams.id);
-    };
-    $scope.deletehouse = function(){
-      $location.path('/deletehouse/'+ $routeParams.id);
     };
     $scope.contact = function() {
       $location.path('/contact');
@@ -120,12 +114,12 @@ app.controller('AddHouseCtrl', ['$scope', '$resource', '$location',
             if($scope.house.address){
                 var Houses = $resource('/api/houses');
                 Houses.save($scope.house, function(){
-                    $location.path('/');
+                    $location.path('/admin');
                 });
             }
         };
         $scope.back = function(){
-            $location.path('/');
+            $location.path('/admin');
         };
     }]);
 
@@ -140,12 +134,12 @@ app.controller('EditHouseCtrl', ['$scope', '$resource', '$location', '$routePara
         $scope.update = function(){
             if($scope.house.address){
                 Houses.update($scope.house, function(){
-                    $location.path('/');
+                    $location.path('/admin');
                 });
             }
         };
         $scope.back = function(){
-            $location.path('/house/' + $routeParams.id);
+            $location.path('/admin');
         };
 
     }]);
@@ -158,10 +152,10 @@ app.controller('DeleteHouseCtrl', ['$scope', '$resource', '$location', '$routePa
         })
         $scope.delete = function(){
             Houses.delete({ id: $routeParams.id }, function(house){
-                $location.path('/');
+                $location.path('/admin');
             });
         };
         $scope.back = function(){
-            $location.path('/house/' + $routeParams.id);
+            $location.path('/admin');
         }
     }]);

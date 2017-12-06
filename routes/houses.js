@@ -4,6 +4,8 @@ var router = express.Router();
 var monk = require('monk');
 var db = monk('localhost:27017/realtor');
 
+var msg = { msg: "unauthorized" };
+
 router.get('/', function(req, res) {
   var collection = db.get('House');
   collection.find({  }, function(err, houses){
@@ -12,18 +14,22 @@ router.get('/', function(req, res) {
   });
 });
 
-
 router.post('/', function(req, res){
-    var collection = db.get('House');
-    collection.insert({
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        zip: req.body.zip
-    }, function(err, house){
-        if (err) throw err;
-        res.json(house);
-    });
+  if (req.session.user !== '5a1ed9c6edb1cab561708f01') {
+    res.json(msg);
+    return;
+  }
+  console.log(req.session.user);    
+  var collection = db.get('House');
+  collection.insert({
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip
+  }, function(err, house){
+    if (err) throw err;
+    res.json(house);
+  });
 });
 
 router.get('/:id', function(req, res) {
@@ -37,27 +43,35 @@ router.get('/:id', function(req, res) {
 });
 
 router.put('/:id', function(req, res){
-    var collection = db.get('House');
-    collection.update({
-        _id: req.params.id
-    },
-    {
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        zip: req.body.zip
-    }, function(err, house){
-        if (err) throw err;
-        res.json(house);
-    });
+  if (req.session.user !== '5a1ed9c6edb1cab561708f01') {
+    res.json(msg);
+    return;
+  }
+  var collection = db.get('House');
+  collection.update({
+    _id: req.params.id
+  },
+  {
+    address: req.body.address,
+    city: req.body.city,
+    state: req.body.state,
+    zip: req.body.zip
+  }, function(err, house){
+    if (err) throw err;
+    res.json(house);
+  });
 });
 
 router.delete('/:id', function(req, res) {
-    var collection = db.get('House');
-    collection.remove({ _id: req.params.id}, function(err, house){
-        if (err) throw err;
-        res.json(house);
-    });
+  if (req.session.user !== '5a1ed9c6edb1cab561708f01') {
+    res.json(msg);
+    return;
+  }
+  var collection = db.get('House');
+  collection.remove({ _id: req.params.id}, function(err, house){
+    if (err) throw err;
+    res.json(house);
+  });
 });
 
 module.exports = router;
