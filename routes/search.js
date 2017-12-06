@@ -3,30 +3,17 @@ var db = monk('localhost:27017/realtor');
 var express = require('express');
 var router = express.Router();
 
-// router.get('/:key', function(req, res) {
-//   var collection = db.get('House');
-//   const keyword = new RegExp(escapeRegex(req.params.key), 'gi');
-//   // var keyword = req.params.key;
-// 	  collection.aggregate([
-// 	  	  { $match: { $or: [ { state: keyword }, { address:keyword }, { city:keyword } ] } },
-//       ], function(err, sear) {
-// 	      if (err) throw err;
-// 	      res.json(sear);
-// 	    }
-// 	  );
-	
-// });
-
-router.get('/search ', function(req, res) {
+router.get('/:key', function(req, res) {
   var collection = db.get('House');
- 	const regex = new RegExp(escapeRegex(req.query.keywords), 'gi');
-  collection.aggregate([
-        { $match: { $or: [ { state: keyword }, { address:keyword }, { city:keyword } ] } },
-      ], function(err, sea) {
-        if (err) throw err;
-        res.json(sea);
-      }
-    );
+  const keyword = new RegExp(escapeRegex(req.params.key), 'gi');
+  // var keyword = req.params.key;
+	  collection.aggregate([
+	  	  { $match: { $or: [ { state: keyword }, { address:keyword }, { city:keyword } ] } },
+      ], function(err, sear) {
+	      if (err) throw err;
+	      res.json(sear);
+	    }
+	  );
 });
 
 function escapeRegex(text) {

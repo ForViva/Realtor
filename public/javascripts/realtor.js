@@ -33,13 +33,6 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html'
     })
-<<<<<<< HEAD
-=======
-    .when('/search?keywords=', {
-      templateUrl: 'partials/result.html',
-      controller: 'SearchCtrl'
-    })
->>>>>>> fad30b9399ec3e3c8030858f75e9a65ddf51d901
     .otherwise({
       redirectTo: '/'
     });
