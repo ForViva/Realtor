@@ -133,7 +133,7 @@ House:
 }
 
 {
-    "_id" : ObjectId("b50e0a91367d381955164da127ba0"),
+    "_id" : ObjectId("b50e0a91367d381955164da1"),
     "address" : "28 Saint Gregory St Unit 1",
     "city" : " Boston",
     "state" : "MA",
@@ -177,7 +177,7 @@ House:
 {
     "_id" : ObjectId("6082653c121f6e6c2e3de2e84c452"),
     "address" : "7245 Kasko Dr",
-    "city" : "   Plano",
+    "city" : "Plano",
     "state" : "TX",
     "zip" : 75024.0,
     "beds" : 3.0,
