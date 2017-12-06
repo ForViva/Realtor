@@ -33,7 +33,7 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html'
     })
-    .when('/search:', {
+    .when('/search', {
       templateUrl: 'partials/searchresult.html',
       controller: 'SearchCtrl'
     })

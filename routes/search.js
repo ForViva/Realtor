@@ -8,13 +8,8 @@ router.get('/:key', function(req, res) {
   const keyword = new RegExp(escapeRegex(req.params.key), 'gi');
   // var keyword = req.params.key;
 	  collection.aggregate([
-	  	{ $match: { $or: [ { state: keyword }, { address:keyword }, { city:keyword } ] } },
-      {$lookup: {
-        from: 'House',
-        localField: 'house_id',
-        foreignField: '_id',
-        as: 'house'
-      }}], function(err, sear) {
+	  	  { $match: { $or: [ { state: keyword }, { address:keyword }, { city:keyword } ] } },
+      ], function(err, sear) {
 	      if (err) throw err;
 	      res.json(sear);
 	    }
