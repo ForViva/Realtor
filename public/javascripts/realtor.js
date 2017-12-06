@@ -33,10 +33,6 @@ app.config(['$routeProvider', function($routeProvider) {
     .when('/contact', {
       templateUrl: 'partials/contact.html'
     })
-    .when('/search/:key', {
-      templateUrl: 'partials/result.html',
-      controller: 'SearchCtrl'
-    })
     .otherwise({
       redirectTo: '/'
     });
@@ -45,16 +41,32 @@ app.config(['$routeProvider', function($routeProvider) {
 app.controller('HomeCtrl', ['$scope', '$resource', '$location',
   function($scope, $resource, $location) {
     var Houses = $resource('/api/houses');
-    Houses.query(function(houses) {
-      $scope.houses = houses;
-    });
+    var Search = $resource('/api/search/:key', { key: '@_key'});
+    if (!$scope.keyword) {
+      Houses.query(function(houses) {
+        $scope.houses = houses;
+      });
+    }
+
+    $scope.search = function() {
+      if ($scope.keyword == '') {
+        Houses.query(function(houses) {
+          $scope.houses = houses;
+        });
+      } else {
+        Search.query({ key: $scope.keyword }, function(houses) {
+          $scope.houses = houses;
+        });
+      }
+    };
+    
     $scope.addhouse = function() {
       $location.path('/addhouse');
     };
   }
 ]);
 
-app.controller('HouseDetailCtrl', ['$scope', '$resource','$route', '$routeParams', '$location',
+app.controller('HouseDetailCtrl', ['$scope', '$resource', '$route', '$routeParams', '$location',
   function($scope, $resource, $route, $routeParams, $location) {	
     var Houses = $resource('/api/houses/:id', { id: '@_id' });
     var Favi = $resource('/api/favorites/:id', { id: '@_id' });
